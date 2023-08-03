@@ -1,29 +1,37 @@
-import Image from "next/image";
-import Link from "next/link";
-import LargeHeading from "@/components/ui/LargeHeading";
-import Paragraph from "@/components/ui/Paragraph";
+import Image from "next/image"
+import Link from "next/link"
+import LargeHeading from "@/components/ui/LargeHeading"
+import Paragraph from "@/components/ui/Paragraph"
 
-import type { Metadata } from "next";
-import { buttonVariants } from "@/components/ui/Button";
-import { Content, contentVariants } from "@/components/ui/Content";
-import { AlignRightIcon, FanIcon } from "lucide-react";
+import type { Metadata } from "next"
+import { buttonVariants } from "@/components/ui/Button"
+import { Content, contentVariants } from "@/components/ui/Content"
 
 export const metadata: Metadata = {
   title: "Lark API | Home",
   description: "Open-source pronunciation assessment API",
-};
+}
 export default function Home() {
   return (
     <div className="relative flex flex-col items-center justify-center overflow-x-hidden">
       <div className="transition-all duration-300 h-screen container bg-gradient-to-tr  from-perfume-50 via-perfume-50 to-perfume-400/60 dark:from-minsk-900 dark:via-minsk-900/30 via-60% dark:to-purple-700/40 to-100% max-w-full w-full mx-auto p-0">
         <div className="h-screen container  max-w-full w-full mx-auto ">
           <div className="py-32 pb-40 h-screen gap-10 flex flex-col text-center justify-center lg:justify-center items-center lg:items-center">
-            <Link
-              href="/documentation"
-              className={`${buttonVariants({ variant: "badge" })}`}
-            >
-              Visit Documentation
-            </Link>
+            <div className="flex gap-4">
+              <Link
+                href="https://github.com/aryanxxvii/lark"
+                className={`${buttonVariants({ variant: "badge" })}`}
+              >
+                GitHub Repo
+              </Link>
+              <Link
+                href="/documentation"
+                className={`${buttonVariants({ variant: "badge" })}`}
+              >
+                Visit Documentation
+              </Link>
+            </div>
+
             <LargeHeading
               size="lg"
               className="animate-text duration-6000 text-transparent from-purple-400 from-0% via-perfume-400 via-50% to-pink-400 to-100% bg-gradient-to-l bg-clip-text  dark:from-indigo-500 dark:via-minsk-200 dark:to-minsk-400 dark:bg-gradient-to-r dark:bg-clip-text"
@@ -117,5 +125,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-  );
+  )
 }
