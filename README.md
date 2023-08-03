@@ -47,11 +47,11 @@
 
 ### The Database part:
 
-<div align="center"><img src="https://i.imgur.com/jjlVtWj.png" width="600" alt="UML"  />
-</div>
+
 - I used Prisma ORM on top of a PlanetScale database which is a serverless MySQL DB.
 - Here is the UML Diagram for the database:
-
+<div align="center"><img src="https://i.imgur.com/jjlVtWj.png" width="600" alt="UML"  />
+</div>
 ### ML Models used
 
 - [facebook/wav2vec2-xlsr-53-espeak-cv-ft](https://huggingface.co/facebook/wav2vec2-xlsr-53-espeak-cv-ft)
