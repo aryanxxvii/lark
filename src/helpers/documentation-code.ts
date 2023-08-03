@@ -2,7 +2,7 @@ export const nodejs = `const axios = require("axios");
 
 const options = {
     method: 'POST',
-    url: 'URL',
+    url: 'https://larkapi.vercel.app/api/v1/lark',
     data: {
       wavData: "UklGRvyWMQBXQVZFZm ... " // in Base64
     },
@@ -19,7 +19,7 @@ axios.request(options).then(function (response) {
 
 export const python = `import requests
 
-url = 'URL'
+url = 'https://larkapi.vercel.app/api/v1/lark'
 api_key = 'YOUR_API_KEY'
 wavData = "UklGRvyWMQBXQVZFZm ... " # in Base64
 
