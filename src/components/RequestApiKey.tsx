@@ -1,48 +1,48 @@
-"use client";
+"use client"
 
-import { createApiKey } from "@/helpers/create-api-key";
-import { Key } from "lucide-react";
-import Link from "next/link";
-import { FC, useState } from "react";
-import CopyButton from "./CopyButton";
-import Icons from "./Icons";
-import { Button, buttonVariants } from "./ui/Button";
-import { Input } from "./ui/Input";
-import LargeHeading from "./ui/LargeHeading";
-import Paragraph from "./ui/Paragraph";
-import { toast } from "./ui/toast";
+import { createApiKey } from "@/helpers/create-api-key"
+import { Key } from "lucide-react"
+import Link from "next/link"
+import { FC, useState } from "react"
+import CopyButton from "./CopyButton"
+import Icons from "./Icons"
+import { Button, buttonVariants } from "./ui/Button"
+import { Input } from "./ui/Input"
+import LargeHeading from "./ui/LargeHeading"
+import Paragraph from "./ui/Paragraph"
+import { toast } from "./ui/toast"
 
 interface RequestApiKeyProps {}
 
 const RequestApiKey: FC<RequestApiKeyProps> = ({}) => {
-  const [isCreating, setIsCreating] = useState<boolean>(false);
-  const [apiKey, setApiKey] = useState<string | null>(null);
+  const [isCreating, setIsCreating] = useState<boolean>(false)
+  const [apiKey, setApiKey] = useState<string | null>(null)
 
   async function createNewApiKey(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setIsCreating(true);
+    e.preventDefault()
+    setIsCreating(true)
 
     try {
-      const generatedApiKey = await createApiKey();
-      setApiKey(generatedApiKey);
+      const generatedApiKey = await createApiKey()
+      setApiKey(generatedApiKey)
     } catch (err) {
       if (err instanceof Error) {
         toast({
           title: "Error",
           message: err.message,
           type: "error",
-        });
+        })
 
-        return;
+        return
       }
 
       toast({
         title: "Error",
         message: "Something went wrong",
         type: "error",
-      });
+      })
     } finally {
-      setIsCreating(false);
+      setIsCreating(false)
     }
   }
 
@@ -101,7 +101,7 @@ const RequestApiKey: FC<RequestApiKeyProps> = ({}) => {
         {apiKey ? (
           <Link
             className={buttonVariants({ variant: "subtle" })}
-            href="/dashboard"
+            href="/dashboard#"
           >
             <Icons.RefreshCw className="h-4 w-4 mr-2 " />
             Click to refresh
@@ -109,7 +109,7 @@ const RequestApiKey: FC<RequestApiKeyProps> = ({}) => {
         ) : null}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RequestApiKey;
+export default RequestApiKey
