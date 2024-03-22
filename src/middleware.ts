@@ -3,24 +3,10 @@
 import { getToken } from "next-auth/jwt"
 import { withAuth } from "next-auth/middleware"
 import { NextResponse } from "next/server"
-import { Ratelimit } from "@upstash/ratelimit"
 
 export default withAuth(
   async function middleware(req) {
     const pathname = req.nextUrl.pathname // relative path
-
-    // Manage rate limiting
-    if (pathname.startsWith("/api")) {
-      const ip = req.ip ?? "127.0.0.1"
-      try {
-        const { success } = await ratelimit.limit(ip)
-
-        if (!success) return NextResponse.json({ error: "Too Many Requests" })
-        return NextResponse.next()
-      } catch (error) {
-        return NextResponse.json({ error: "Internal Server Error" })
-      }
-    }
 
     // Manage route protection
     const token = await getToken({ req })
