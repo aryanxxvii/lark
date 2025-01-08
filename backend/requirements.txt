@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+motor
+pydantic[email]
+PyJWT
+passlib[bcrypt]
+python-multipart
+httpx
+python-dotenv
+gradio_client

@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-white font-jakarta antialiased;
+    background-image: 
+      radial-gradient(circle at top, rgba(16,185,129,0.03) 0%, transparent 50%),
+      radial-gradient(circle at bottom, rgba(16,185,129,0.02) 0%, transparent 50%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-instrument;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-xl 
+           transition-all duration-200 font-medium shadow-glow-sm 
+           hover:shadow-glow-md border border-accent/20 hover:border-accent/40
+           backdrop-blur-sm;
+  }
+  
+  .btn-dark {
+    @apply bg-surface/80 hover:bg-surface text-white px-4 py-2 rounded-xl 
+           transition-all duration-300 font-medium shadow-glow-sm 
+           hover:shadow-glow-md border border-accent/20 hover:border-accent/40
+           backdrop-blur-sm hover:shadow-accent/20;
+  }
+
+  .repo-badge {
+    @apply inline-flex items-center px-3 py-1 text-sm rounded-full 
+           border border-accent/20 bg-accent/5 text-accent
+           transition-all duration-300 hover:bg-accent/10 hover:border-accent/30;
+  }
+  
+  .btn-secondary {
+    @apply bg-surface/50 hover:bg-surface-secondary text-white/90 hover:text-white
+           px-4 py-2 rounded-xl transition-all duration-200 font-medium
+           border border-border hover:border-accent/20 backdrop-blur-sm;
+  }
+  
+  .input-field {
+    @apply bg-surface/50 border border-border rounded-xl px-4 py-2
+           focus:border-accent focus:ring-1 focus:ring-accent/50
+           text-white placeholder-white/30 w-full transition-all backdrop-blur-sm;
+  }
+  
+  .card {
+    @apply bg-surface/50 backdrop-blur-sm border border-border rounded-xl p-6
+           hover:border-accent/20 transition-all hover:shadow-glow-sm;
+  }
+
+  .glass-card {
+    @apply relative bg-surface/30 backdrop-blur-md border border-white/[0.08]
+           rounded-xl transition-all duration-300
+           hover:border-accent/20 hover:shadow-glow-sm;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-l from-emerald-400 to-emerald-300 bg-clip-text text-transparent
+           hover:from-emerald-300 hover:to-emerald-400 transition-all duration-500 hover:cursor-default;
+  }
+
+  .nav-link {
+    @apply text-white/70 hover:text-white px-3 py-2 rounded-xl text-sm font-medium
+           transition-colors hover:bg-surface-secondary/50 backdrop-blur-sm;
+  }
+
+  .nav-link-active {
+    @apply text-white bg-surface-secondary/50 border border-accent/20;
+  }
+
+  .feature-card {
+    @apply glass-card p-8 hover:translate-y-[-2px];
+    background: linear-gradient(
+      210deg,
+      rgba(31, 41, 55, 0.6) 0%,
+      rgba(17, 24, 39, 0.6) 100%
+    );
+    transition: background 0.3s ease-in-out;
+  }
+
+  .feature-card:hover {
+    background: linear-gradient(
+      210deg,
+      rgba(16, 185, 129, 0.1) 0%,
+      rgba(16, 185, 129, 0.05) 100%
+    );
+  }
+
+  .code-card {
+    @apply glass-card p-8;
+    background: linear-gradient(
+      180deg,
+      rgba(17, 24, 39, 0.8) 0%,
+      rgba(17, 24, 39, 0.9) 100%
+    );
+  }
+} 
