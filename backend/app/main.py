@@ -7,7 +7,7 @@ app = FastAPI(title="Lark API Manager")
 
 # CORS middleware configuration
 origins = [
-    "http://localhost:3000",
+    "https://larkapi.vercel.app",
 ]
 
 app.add_middleware(
