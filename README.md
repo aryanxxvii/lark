@@ -1,30 +1,14 @@
 # Lark API Readme
 
-<div align="left">
-  <img src="https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white&style=for-the-badge" height="20" alt="nextjs logo"  />
-  <img width="12" />
-  <img src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black&style=for-the-badge" height="20" alt="react logo"  />
-  <img width="12" />
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white&style=for-the-badge" height="20" alt="typescript logo"  />
-  <img width="12" />
-  <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge" height="20" alt="python logo"  />
-  <img width="12" />
-  <img src="https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white&style=for-the-badge" height="20" alt="prisma logo"  />
-  <img width="12" />
-  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?logo=tailwindcss&logoColor=black&style=for-the-badge" height="20" alt="tailwindcss logo"  />
-  <img width="12" />
-  <img src="https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white&style=for-the-badge" height="20" alt="redis logo"  />
-</div>
-
 ## What is it?
 
-- Lark API is a speech assessment REST API built using NextJS in Typescript.
+- Lark API is a speech assessment REST API built using FastAPI in Python.
 - It provides accuracy scores, speech to text transcription, and the projected IELTS pronunciation band.
 - It allows English learning apps and websites to assess and provide real-time feedback on the users’ pronunciation.
 
 ## How does it work?
 
-### The Machine Learning part:
+### ML:
 
 <div align="center"><img src="https://i.imgur.com/veWTSgg.png" width="600" alt="ML"  />
 </div>
@@ -33,25 +17,13 @@
 - It converts the speech to it’s phonetic transcription (S2P) using zero-shot cross-lingual recognition.
 - After recognizing the phonetics of the speech, it compares it with the ideal pronunciation of the transcribed speech using the Jaro-Winkler string similarity algorithm.
 
-### The Backend API part:
+### Backend:
 
-- The API is written completely in NextJS using next-pages routing.
-- I have used next-auth for user authentication via GitHub and maintaining/persisting sessions.
-- I used Redis for rate-limiting the API based on the IP of the call.
+- The API is written completely in FastAPI with MongoDB as the database.
 
 ### The Frontend part:
 
-- The Frontend is written using NextJS in Typescript.
-- I opted for TailwindCSS as the CSS framework for this project.
-- For the tables and icons, Material UI has been used.
-
-### The Database part:
-
-
-- I used Prisma ORM on top of a PlanetScale database which is a serverless MySQL DB.
-- Here is the UML Diagram for the database:
-<div align="center"><img src="https://i.imgur.com/jjlVtWj.png" width="600" alt="UML"  />
-</div>
+- The Frontend is written using ReactJS and TailwindCSS.
 
 ### ML Models used
 
