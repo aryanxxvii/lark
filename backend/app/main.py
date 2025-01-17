@@ -2,8 +2,15 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import auth_router, api_keys_router, analytics_router, lark_router
 from app.routes.auth import get_current_user
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 
+limiter = Limiter(key_func=get_remote_address)
 app = FastAPI(title="Lark API Manager")
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # CORS middleware configuration
 origins = [
@@ -18,6 +25,9 @@ app.add_middleware(
     allow_headers=["*"],
     expose_headers=["*"]
 )
+
+# Add rate limiting middleware
+app.add_middleware(SlowAPIMiddleware)
 
 # Public routes
 app.include_router(auth_router, prefix="/api/v1/auth", tags=["auth"])

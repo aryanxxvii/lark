@@ -7,11 +7,19 @@ from ..database import api_keys, api_calls
 from ..schemas import LarkRequest, LarkResponse
 from bson import ObjectId
 from gradio_client import Client
+from functools import lru_cache
+from ..main import limiter
 
 router = APIRouter()
 
 # Initialize Gradio client
 client = Client("aryanxxvii/larkapi")
+
+@lru_cache(maxsize=128)
+def get_cached_response(audio_url: str, api_key: str):
+    """Cache responses based on audio URL and API key"""
+    return client.predict(audio_url)
+
 async def validate_api_key(api_key: str):
     # Remove 'Bearer ' if present
     if api_key.startswith('Bearer '):
@@ -23,39 +31,37 @@ async def validate_api_key(api_key: str):
     return key
 
 @router.post("/lark", response_model=LarkResponse)
+@limiter.limit("10/minute")  # Rate limit: 10 requests per minute per IP
 async def process_audio(
     data: LarkRequest,
     authorization: str = Header(None, description="API key in format: 'Bearer your_api_key' or just 'your_api_key'")
 ):
     if not authorization:
-        raise HTTPException(status_code=401, detail="API key required")
+        raise HTTPException(status_code=401, detail="API key is required")
+    
+    key = await validate_api_key(authorization)
     
     try:
-        # Validate API key
-        api_key = await validate_api_key(authorization)
+        # Try to get cached response first
+        result = get_cached_response(data.audio_url, authorization)
         
-        # Call ML model using Gradio client
-        result = client.predict(
-            audioAsB64=data.data,
-            api_name="/predict"
-        )
-        
-        # Log API call
+        # Log the API call
         await api_calls.insert_one({
-            "api_key_id": api_key["_id"],
-            "user_id": api_key["user_id"],
-            "endpoint": "/lark",
-            "status_code": 200,
-            "response_time": time.time(),
-            "timestamp": datetime.now()
+            "api_key_id": key["_id"],
+            "timestamp": datetime.utcnow(),
+            "endpoint": "lark",
+            "status": "success",
+            "cached": True
         })
         
-        # Parse and return result
-        return LarkResponse(
-            similarity_score=result[0],  # Adjust these indices based on 
-            band=result[1],             # what your Gradio endpoint returns
-            transcription=result[2],
-        )
-            
+        return {"result": result}
+        
     except Exception as e:
+        await api_calls.insert_one({
+            "api_key_id": key["_id"],
+            "timestamp": datetime.utcnow(),
+            "endpoint": "lark",
+            "status": "error",
+            "error": str(e)
+        })
         raise HTTPException(status_code=500, detail=str(e))

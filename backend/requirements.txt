@@ -8,3 +8,4 @@ python-multipart
 httpx
 python-dotenv
 gradio_client
+slowapi
