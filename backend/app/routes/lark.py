@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Header
+from fastapi import APIRouter, HTTPException, Header, Request
 from typing import Optional
 import time
 from datetime import datetime
@@ -33,6 +33,7 @@ async def validate_api_key(api_key: str):
 @router.post("/lark", response_model=LarkResponse)
 @limiter.limit("10/minute")  # Rate limit: 10 requests per minute per IP
 async def process_audio(
+    request: Request,
     data: LarkRequest,
     authorization: str = Header(None, description="API key in format: 'Bearer your_api_key' or just 'your_api_key'")
 ):
