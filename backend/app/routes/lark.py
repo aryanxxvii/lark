@@ -15,10 +15,20 @@ router = APIRouter()
 # Initialize Gradio client
 client = Client("aryanxxvii/larkapi")
 
+def normalize_api_key(api_key: str) -> str:
+    """Normalize API key by removing 'Bearer ' prefix if present."""
+    if api_key.startswith('Bearer '):
+        return api_key[7:]
+    return api_key
+
 @lru_cache(maxsize=128)
-def get_cached_response(audio_url: str, api_key: str):
-    """Cache responses based on audio URL and API key"""
-    return client.predict(audio_url)
+def get_cached_response(data: str, normalized_api_key: str):
+    """Cache responses based on data and normalized API key.
+    
+    Note: The normalized_api_key is used as part of the cache key to ensure
+    different users don't share cached responses.
+    """
+    return client.predict(data)
 
 async def validate_api_key(api_key: str):
     # Remove 'Bearer ' if present
@@ -43,8 +53,14 @@ async def process_audio(
     key = await validate_api_key(authorization)
     
     try:
-        # Try to get cached response first
-        result = get_cached_response(data.audio_url, authorization)
+        # Normalize API key and get cached response
+        normalized_key = normalize_api_key(authorization)
+        result = get_cached_response(data.data, normalized_key)
+        
+        # Extract values from the tuple response
+        similarity_score = float(result[0])
+        band = int(result[1])
+        transcription = result[2]
         
         # Log the API call
         await api_calls.insert_one({
@@ -55,7 +71,12 @@ async def process_audio(
             "cached": True
         })
         
-        return {"result": result}
+        # Return response matching the LarkResponse model
+        return {
+            "similarity_score": similarity_score,
+            "band": band,
+            "transcription": transcription
+        }
         
     except Exception as e:
         await api_calls.insert_one({

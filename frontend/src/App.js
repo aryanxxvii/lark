@@ -5,6 +5,7 @@ import Register from './components/Auth/Register';
 import Dashboard from './components/Dashboard';
 import ApiKeys from './components/Dashboard/ApiKeys';
 import Analytics from './components/Dashboard/Analytics';
+import TestAPI from './components/Dashboard/TestAPI';
 import Navbar from './components/Layout/Navbar';
 import PrivateRoute from './components/Auth/PrivateRoute';
 import Home from './components/Home/Home';
@@ -28,6 +29,7 @@ function App() {
                       <Route index element={<Dashboard />} />
                       <Route path="api-keys" element={<ApiKeys />} />
                       <Route path="analytics" element={<Analytics />} />
+                      <Route path="test-api" element={<TestAPI />} />
                     </Routes>
                   </div>
                 </div>

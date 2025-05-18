@@ -32,6 +32,9 @@ function Navbar({ showAuthButtons = false }) {
                   <Link to="/dashboard/analytics" className="nav-link">
                     Usage
                   </Link>
+                  <Link to="/dashboard/test-api" className="nav-link">
+                    Test API
+                  </Link>
                 </div>
               </div>
             )}

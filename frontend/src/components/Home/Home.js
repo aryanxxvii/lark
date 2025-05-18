@@ -7,7 +7,7 @@ import { FiArrowRight } from 'react-icons/fi';
 import Navbar from '../Layout/Navbar';
 
 function Home() {
-  const codeExample = `const response = await fetch('https://api.lark.ai/v1/lark', {
+  const codeExample = `const response = await fetch('https://larkapi.vercel.app/api/v1/lark', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY',
@@ -113,7 +113,7 @@ function Home() {
                 
                 <div className="bg-surface/50 backdrop-blur-sm rounded-xl p-6 pt-10 font-mono text-sm border border-border overflow-x-auto">
                   <code className="text-white/80 whitespace-pre-wrap">
-                    <span className="text-accent">const</span>{" "}<span className="text-accent-hover">response</span> = <span className="text-accent">await</span> fetch(<span className="text-emerald-300">'https://api.lark.ai/v1/lark'</span>, {"{"}
+                    <span className="text-accent">const</span>{" "}<span className="text-accent-hover">response</span> = <span className="text-accent">await</span> fetch(<span className="text-emerald-300">'https://larkapi.vercel.app/api/v1/lark'</span>, {"{"}
 {"\n"}{"    "}method: <span className="text-emerald-300">'POST'</span>,
 {"\n"}{"    "}headers: {"{"}
 {"\n"}{"        "}Authorization: <span className="text-emerald-300">'Bearer YOUR_API_KEY'</span>,

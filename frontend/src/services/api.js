@@ -41,4 +41,26 @@ export const getApiCalls = async () => {
   return response.data;
 };
 
-export default api; 
+export const testLarkAPI = async (apiKey, audioData) => {
+  // Create a new axios instance without the global interceptor to avoid duplicate auth headers
+  const tempAxios = axios.create({
+    baseURL: config.apiUrl,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const response = await tempAxios.post(
+    '/lark',
+    { data: audioData },
+    {
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  return response.data;
+};
+
+export default api;

@@ -14,6 +14,16 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 # CORS middleware configuration
 origins = [
     "https://larkapi.vercel.app",
+    "http://localhost:3000",  # Common React dev server
+    "http://127.0.0.1:3000",  # Alternative localhost
+    "http://localhost:8000",  # Common FastAPI dev server
+    "http://127.0.0.1:8000",  # Alternative FastAPI dev server
+    "http://localhost:8080",  # Common alternative port
+    "http://127.0.0.1:8080",  # Alternative port
+    "http://localhost",       # Bare localhost
+    "http://localhost:3000",  # Common frontend port
+    "http://localhost:5173",  # Vite dev server
+    "http://127.0.0.1:5173",  # Vite dev server alternative
 ]
 
 app.add_middleware(
