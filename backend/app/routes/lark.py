@@ -8,7 +8,7 @@ from ..schemas import LarkRequest, LarkResponse
 from bson import ObjectId
 from gradio_client import Client
 from functools import lru_cache
-from ..main import limiter
+from app.limiter import limiter
 
 router = APIRouter()
 
